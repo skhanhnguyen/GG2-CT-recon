@@ -29,6 +29,7 @@ end
 % sum over energy
 % This is the sum in equation (3)
 Y = sum(Y);
+fprintf(1,'Y nan:sum(isnan(Y))
 % add in noise model
 
 % ensure it is above zero for log

@@ -1,4 +1,4 @@
-function [Y] = ct_scan(P, material, X, scale, angles, mas)
+function [Y] = ct_scan_method(P, material, X, scale, angles, mas, interpmethod)
 
 % CT_SCAN simulate CT scanning of an object
 %
@@ -10,8 +10,8 @@ function [Y] = ct_scan(P, material, X, scale, angles, mas)
 %  scale is the pixel size of the input array X, in cm per pixel.
 
 % check inputs
-narginchk(5,6);
-if (nargin<6)
+narginchk(6,7);
+if (nargin<7)
   mas = 10000;
 end
 
@@ -33,13 +33,12 @@ for a=1:angles
   p = -pi/2-a*pi/angles;
   xo = xi*cos(p) - yi*sin(p) + (n/2);
   yo = xi*sin(p) + yi*cos(p) + (n/2);
-  fprintf(1, 'xo yo nans: ', sum(isnan([xo,yo])))
+  
   % For each material, add up how many pixels contain this on each ray
   depth = zeros(size(material.coeffs,2),n);
   for m=1:size(material.coeffs,2)
     if (m==air) continue; end
-    depth(m,:) = sum(interp2(double(X==m), xo, yo, '*cubic', 0));
-    fprintf(1, 'depth nans: ', sum(isnan(depth)))
+    depth(m,:) = sum(interp2(double(X==m), xo, yo, interpmethod, 0));
   end
   
   % ensure an appropriate amount of air is included in the calculation
