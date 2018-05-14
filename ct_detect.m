@@ -21,11 +21,13 @@ end
 Y = P*ones(1,size(depth,2));
 
 % calculate array of residual mev x samples for each material in turn
+% This is the product in equation (3)
 for m=1:size(coeffs,2)
   Y = photons(Y, coeffs(:,m), depth(m,:), mas);
 end
 
 % sum over energy
+% This is the sum in equation (3)
 Y = sum(Y);
 
 % add in noise model

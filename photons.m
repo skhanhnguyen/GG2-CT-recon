@@ -7,7 +7,7 @@ function [Y] = photons(X, coeff, depth, mas)
 %  particular material with linear attenuation coefficients given by coeff,
 %  and a set of depths given by depth (1 x samples)
 %
-%  It is more efficient to calculate this for a range of samples rather then
+%  It is more efficient to calculate this for a range of samples rather than
 %  one at a time
 %
 %  mas defines the current-time-product which affects the noise distribution
