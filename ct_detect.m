@@ -20,6 +20,9 @@ end
 % extend source photon array so it covers all samples
 Y = P*ones(1,size(depth,2));
 
+% Change negative depths to zero
+depth(depth<0) = 0;
+
 % calculate array of residual mev x samples for each material in turn
 % This is the product in equation (3)
 for m=1:size(coeffs,2)
