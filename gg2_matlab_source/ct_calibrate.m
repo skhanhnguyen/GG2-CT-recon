@@ -18,7 +18,3 @@ air = find(strcmp(material.name,{'Air'}));
 n = size(X, 2);
 
 % Perform calibration
-% Source energy = air CT scan
-I_0 = sum(P);
-% I_air = sum(photons(P,material.coeffs(:,air),2*n*scale));
-Y = -log(X/I_0); % requires approximation of mu constant at all E

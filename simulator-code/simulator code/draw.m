@@ -18,8 +18,7 @@ hold off;
 pcolor(flipud(data));
 
 % change this to something else if you don't want linear interpolation
-% shading interp;
-shading flat;
+shading interp;
 
 axis image;  % equal aspect ratio
 axis off;       % no axes

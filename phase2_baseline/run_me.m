@@ -4,8 +4,10 @@ phantom_impulse = ct_phantom(material.name,256,2,'Titanium');
 phantom_disc = ct_phantom(material.name,256,1,'Titanium');
 phantom_pelvic_pins = ct_phantom(material.name,256,7,'Titanium');
 % END DEFINITIONS
-%P = source.photons(:,1);
-P = fake_source(source.mev,0.12,material.coeffs(:,15),1,'ideal');
+
+P = source.photons(:,1);
+% P = fake_source(source.mev,0.12,material.coeffs(:,15),1,'ideal');
+
 selected_phantom = phantom_hip;
 
 % ATTENUATION FIELD OF PHANTOM
@@ -19,9 +21,11 @@ phantom_mu_field = reshape(-log(sum(exp(-material.coeffs(:,selected_phantom)).* 
     repmat(P, [1 s1*s2])/sum(P),1)), s1, s2);
 
 
-angles = 256; alpha = 0.5; interp = 'linear'; scale = 0.1; 
-str = sprintf('#Angles = %d, alpha = %d, interpolation = %s, scale = %.02g', angles, scale, interp, alpha);
-y = scan_and_reconstruct(P, material, selected_phantom, scale, angles, 100, alpha);
+angles = 256; alpha = 0.5; interp = 'linear'; scale = 0.1; mas = 100;
+% add Poisson model for source
+P = (P*mas*scale^2);
+str = sprintf('#Angles = %d, alpha = %d, interpolation = %s, scale = %.02g', angles, alpha, interp, scale);
+y = scan_and_reconstruct(P, material, selected_phantom, scale, angles, mas, alpha);
 figure;
 draw(selected_phantom);
 title('Phantom')
@@ -30,8 +34,8 @@ draw(y);
 title(str)
 caxis([0 1]);
 
-percentage_error = 100*abs(y-phantom_mu_field)./phantom_mu_field;
-figure;
-draw(percentage_error);
-title('Percentage Error')
-caxis([0 100])
+% percentage_error = 100*abs(y-phantom_mu_field)./phantom_mu_field;
+% figure;
+% draw(percentage_error);
+% title('Percentage Error')
+% caxis([0 100])

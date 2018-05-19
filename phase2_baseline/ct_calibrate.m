@@ -12,13 +12,13 @@ function [Y] = ct_calibrate(P, material, X, scale)
 narginchk(4,4);
 
 % find coeffs corresponding to air
-air = find(strcmp(material.name,{'Air'}));
+air = (strcmp(material.name,{'Air'}));
 
 % Get dimensions - air in ct_scan has depth 2*n*scale
 n = size(X, 2);
 
 % Perform calibration
 % Source energy = air CT scan
-I_0 = sum(P);
-% I_air = sum(photons(P,material.coeffs(:,air),2*n*scale));
-Y = -log(X/I_0); % requires approximation of mu constant at all E
+% I_0 = sum(P);
+I_air = sum(photons(P, material.coeffs(:, air), n*2*scale));
+Y = -log(X/I_air);
