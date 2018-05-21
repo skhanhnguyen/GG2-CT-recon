@@ -36,12 +36,12 @@ end
 Y = sum(Y);
 
 % add in detection noise model
-% bg_coeff = 0;
-% bg_noise = poissrnd(bg_coeff*ones(size(Y)));
-% scat_coeff = .0;
-% scatter_noise = sum(poissrnd(source*scat_coeff));
-% Y = Y + bg_noise + scatter_noise;
+bg_coeff = 1e6;
+bg_noise = poissrnd(bg_coeff*ones(size(Y)));
+scat_coeff = 0.001;
+scatter_noise = sum(poissrnd(source*scat_coeff));
 
+Y = Y + bg_noise + scatter_noise;
 % ensure it is above zero for log
 Y(Y<=1) = 1;
 

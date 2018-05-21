@@ -1,4 +1,4 @@
-function [Y] = scan_and_reconstruct(P, material, X, scale, angles, mas, alpha)
+function [S,F,Y] = scan_and_reconstruct(P, material, X, scale, angles, mas, alpha)
 
 % SCAN_AND_RECONSTRUCT Simulation of the CT scanning process
 %
@@ -30,3 +30,5 @@ filtered = ramp_filter(calibrated, scale, alpha);
 
 % Back-projection
 Y = back_project(filtered);
+F = filtered;
+S = calibrated;
