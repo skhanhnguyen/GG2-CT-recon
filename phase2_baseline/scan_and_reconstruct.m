@@ -19,13 +19,11 @@ end
 % create sinogram from phantom data, with received detector values
 sinogram = ct_scan(P,material,X,scale,angles,mas);
 
-% correct sinogram's beam hardening
-[f, C] = bh_coeffs(P, material, scale);
-corrected_sinogram = bh_correction(f, C, sinogram);
-
-
 % convert detector values into attenuation values
-calibrated = ct_calibrate(P,material,corrected_sinogram,scale);
+calibrated = ct_calibrate(P,material,sinogram,scale);
+
+% correct sinogram's beam hardening
+% calibrated = bh_correction(P, material, scale, calibrated);
 
 % Filter
 filtered = ramp_filter(calibrated, scale, alpha);
