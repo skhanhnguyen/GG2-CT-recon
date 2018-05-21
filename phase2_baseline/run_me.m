@@ -30,7 +30,7 @@ angles = 256; alpha = 0.01; interp = 'linear'; scale = 0.1; mas = 100;
 % add Poisson model for source
 P = (P*mas*scale^2);
 str = sprintf('#Angles = %d, alpha = %d, interpolation = %s, scale = %.02g', angles, alpha, interp, scale);
-y = scan_and_reconstruct(P, material, selected_phantom, scale, angles, mas, alpha);
+[s, f, y] = scan_and_reconstruct(P, material, selected_phantom, scale, angles, mas, alpha);
 figure;
 draw(selected_phantom);
 title('Phantom')
