@@ -42,6 +42,7 @@ Y = sum(Y);
 % scatter_noise = sum(poissrnd(source*scat_coeff));
 % Y = Y + bg_noise + scatter_noise;
 
-% ensure it is above zero for log
-Y(Y<=1) = 1;
+% ensure it is above zero for log [currently correction AFTER bh
+% correction 21 May 2018. A Sherman et al]
+% Y(Y<=1) = 1;
 
