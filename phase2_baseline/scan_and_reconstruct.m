@@ -23,7 +23,7 @@ sinogram = ct_scan(P,material,X,scale,angles,mas);
 calibrated = ct_calibrate(P,material,sinogram,scale);
 
 % correct sinogram's beam hardening
-% calibrated = bh_correction(P, material, scale, calibrated);
+calibrated = bh_correction(P, material, scale, calibrated);
 
 % Filter
 filtered = ramp_filter(calibrated, scale, alpha);
