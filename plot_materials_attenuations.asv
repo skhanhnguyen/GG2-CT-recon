@@ -1,0 +1,9 @@
+load ct_data;
+figure;
+log_mev_range = linspace(min(log(material.mev)/log(10)),max(log(material.mev)/log(10)),10000);
+log_coeff_range = interp1(log(material.mev)/log(10),log(material.coeffs)/log(10),mev_range, 'spline');
+plot(log_mev_range, log_coeff_
+figure;
+loglog(material.mev,material.coeffs)
+xlabel('Energy, Mev')
+ylabel('Attenuation, cm^-1')
